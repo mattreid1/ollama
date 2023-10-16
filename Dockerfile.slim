@@ -8,6 +8,9 @@ WORKDIR /go/src/github.com/jmorganca/ollama
 RUN apt-get update && apt-get install -y git build-essential cmake
 
 COPY . .
+RUN git init
+RUN git remote rm origin
+RUN git remote add origin https://github.com/jmorganca/ollama.git
 RUN git submodule update --init --recursive
 ENV GOARCH=$TARGETARCH
 RUN /usr/local/go/bin/go generate llm/llama.cpp/generate_linux.go \
