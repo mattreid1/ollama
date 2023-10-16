@@ -8,6 +8,7 @@ WORKDIR /go/src/github.com/jmorganca/ollama
 RUN apt-get update && apt-get install -y git build-essential cmake
 
 COPY . .
+RUN git init
 ENV GOARCH=$TARGETARCH
 RUN /usr/local/go/bin/go generate llm/llama.cpp/generate_linux.go \
     && /usr/local/go/bin/go build -ldflags "-linkmode=external -extldflags='-static' -X=github.com/jmorganca/ollama/version.Version=$VERSION -X=github.com/jmorganca/ollama/server.mode=release" .
