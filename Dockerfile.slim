@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y git build-essential cmake
 
 COPY . .
 RUN git init
-RUN git remote origin rm
+RUN git remote origin rm; exit 0
 RUN git remote add origin https://github.com/jmorganca/ollama.git
 RUN git fetch origin
 RUN git submodule update --init --recursive
